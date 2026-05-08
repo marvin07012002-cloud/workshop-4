@@ -74,6 +74,7 @@ public class Vehicle {
 
     public void setOdometer(int odometer) {
         this.odometer = odometer;
+
     }
 
     public double getPrice() {

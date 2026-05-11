@@ -26,52 +26,54 @@ public class Dealership {
         return number;
     }
 
-    public double getVehiclesByPrice(double min, double max){
-        double priceResult = 0;
-        return priceResult;
+    public ArrayList<Vehicle> getVehiclesByPrice(double min, double max) {
+        return null;
     }
 
-    public String getVehiclesByModel(String make,String model){
-        String vehiculeResult = "";
-        return vehiculeResult;
+    public ArrayList<Vehicle> getVehiclesByModel(String make, String model) {
+        return null;
     }
 
-    public int getVehiclesByYear(int min,int max){
-        int yearResult = 0;
-        return yearResult;
+    public ArrayList<Vehicle> getVehiclesByYear(int min, int max) {
+        return null;
     }
 
-    public String getVehicleByColor(String color){
-        String colorResult = "";
-        return colorResult;
+    public ArrayList<Vehicle> getVehicleByColor(String color) {
+        ArrayList<Vehicle> vehicles = new ArrayList<>();
+
+        for(Vehicle currentVehicle : this.inventory){
+            String currentColor = currentVehicle.getColor();
+            if(currentColor.equalsIgnoreCase(color)){
+                vehicles.add(currentVehicle);
+            }
+        }
+
+        return vehicles;
     }
 
-    public int getVehicleByMillage(int min,int max){
-        int millageResult = 0;
-        return millageResult;
+    public ArrayList<Vehicle> getVehicleByMillage(int min, int max) {
+        return null;
     }
 
-    public String getVehicleByType(String vehicleType){
-        String resultType = "";
-        return resultType;
+    public ArrayList<Vehicle> getVehicleByType(String vehicleType) {
+        return null;
     }
 
-    public String getAllVehicles(){
-        String allVehicles = "";
-        return allVehicles;
+    public ArrayList<Vehicle> getAllVehicles(Vehicle vehicle) {
+        ArrayList<Vehicle> vehicles = new ArrayList<>();
+        for (Vehicle v : this.inventory) {
+            vehicles.add(v);
+        }
+        return vehicles;
     }
 
-    public void addVehicule(Vehicle vehicle){
+    public void addVehicle(Vehicle vehicle) {
         inventory.add(vehicle);
     }
 
-    public void removeVehicle(Vehicle vehicle){
+    public void removeVehicle(Vehicle vehicle) {
         inventory.remove(vehicle);
-
     }
-
-
-
 
 
 }

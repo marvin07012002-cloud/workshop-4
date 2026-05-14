@@ -9,33 +9,34 @@ public class DealershipFileMananger {
             BufferedReader reader = new BufferedReader(new FileReader("src/main/resources" + "inventory.csv"));
             String line = reader.readLine();
 
-            String[] lineSplit = line.split("\\|");
+            String[] parts = line.split("\\|");
 
-            Dealership dealership = new Dealership(lineSplit[0], lineSplit[1], lineSplit[2]);
+            Dealership dealership = new Dealership(parts[0], parts[1], parts[2]);
 
             line = reader.readLine();
             while (line != null) {
-                lineSplit = line.split("\\|");
-                int vin = Integer.parseInt(lineSplit[0]);
-                int year = Integer.parseInt(lineSplit[1]);
-                String make = lineSplit[2];
-                String model = lineSplit[3];
-                String vehicleType = lineSplit[4];
-                String color = lineSplit[5];
-                int odometer = Integer.parseInt(lineSplit[6]);
-                double price = Double.parseDouble((lineSplit[7]));
+                parts = line.split("\\|");
+                int vin = Integer.parseInt(parts[0]);
+                int year = Integer.parseInt(parts[1]);
+                String make = parts[2];
+                String model = parts[3];
+                String vehicleType = parts[4];
+                String color = parts[5];
+                int odometer = Integer.parseInt(parts[6]);
+                double price = Double.parseDouble((parts[7]));
 
                 Vehicle newVehicle = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
 
                 dealership.addVehicle(newVehicle);
                 line = reader.readLine();
 
-            }
 
+
+            }
+            reader.close();
             return dealership;
 
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -44,14 +45,23 @@ public class DealershipFileMananger {
     }
 
     public void saveDealership(Dealership dealership){
-        try{
+        try {
             FileWriter fileWriter = new FileWriter("src/main/resources" + "inventory.csv");
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-            String line = dealership.getName()+"|"+dealership.getAddress()+"|"+dealership.getNumber()+"\n";
+            String line = dealership.getName() + "|" + dealership.getAddress() + "|" + dealership.getNumber() + "\n";
+            bufferedWriter.write(line);
+
+            for (Vehicle v:dealership.getAllVehicles()){
+                bufferedWriter.write(v.getVin() + "|"+v.getYear()+"|"+v.getMake()+"|"+v.getModel()+"|"+v.getVehicleType()+"|"+v.getColor()+v.getOdometer()+
+                        "|"+v.getPrice());
+            }
 
 
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+
 
     }
 

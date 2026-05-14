@@ -59,7 +59,7 @@ public class Dealership {
         return null;
     }
 
-    public ArrayList<Vehicle> getAllVehicles(Vehicle vehicle) {
+    public ArrayList<Vehicle> getAllVehicles() {
         ArrayList<Vehicle> vehicles = new ArrayList<>();
         for (Vehicle v : this.inventory) {
             vehicles.add(v);

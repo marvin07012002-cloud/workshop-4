@@ -18,7 +18,7 @@ public class UserInterface {
         do {
             System.out.println("""
                     Menu
-                    A) for display all cars
+                    A) For display all cars
                     B) Display cars by price
                     X) Exit
                     """);
@@ -26,10 +26,13 @@ public class UserInterface {
 
             switch (userInput){
                 case "A":
-                    displayAlLCars();
+                    displayAlLCarsMenu();
                     break;
                 case "B":
-                    DisplayCarsByPrice();
+                   processAddVehicles();
+                    break;
+                case "C":
+                    processRemoveVehicel();
                     break;
                 case "X":
                     running =  false;

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -110,6 +111,20 @@ public class UserInterface {
     }
 
     private void processGetByMilageRequest() {
+        try {
+            System.out.println("Enter minimum mileage: ");
+            int minimumMilage = scanner.nextInt();
+            scanner.nextLine();
+
+            System.out.println("Enter maximum mileage");
+            int maximumMilage = scanner.nextInt();
+            scanner.nextLine();
+
+            display(dealership.getVehicleByMillage(minimumMilage,maximumMilage));
+        } catch (InputMismatchException ime) {
+            System.err.println("Enter correct value");
+            scanner.nextLine();
+        }
     }
 
     private void processGetByColorRequest() {

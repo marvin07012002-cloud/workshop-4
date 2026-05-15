@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -9,7 +10,7 @@ public class UserInterface {
         this.dealership = dfm.getDealership();
     }
 
-    public void display() {
+    public void display(ArrayList<Vehicle> allVehicles) {
         init();
 
         boolean running = true;
@@ -65,25 +66,62 @@ public class UserInterface {
 
                 switch (userInput) {
                     case "1":
-
+                        processGetByPriceRequest();
+                        break;
                     case "2":
+                        processGetByModelRequest();
                         break;
                     case "3":
+                        processGetByYearRequest();
                         break;
                     case "4":
+                        processGetByColorRequest();
                         break;
                     case "5":
+                        processGetByMilageRequest();
                         break;
                     case "6":
+                        processGetByVehicleTypeRequest();
                         break;
                     case "7":
+                        processGetAllVehiclesRequest();
                         break;
                     case "8":
+                        running = false;
+                        break;
 
                 }
 
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
         }
+    }
+
+    private void processGetAllVehiclesRequest() {
+        display(dealership.getAllVehicles());
+    }
+
+    private void processGetByVehicleTypeRequest() {
+        System.out.println("Enter vehicle type:");
+        String vehicleType = scanner.nextLine();
+
+    display(dealership.getVehicleByType(vehicleType));
+    }
+
+    private void processGetByMilageRequest() {
+    }
+
+    private void processGetByColorRequest() {
+    }
+
+    private void processGetByYearRequest() {
+    }
+
+    private void processGetByModelRequest() {
+    }
+
+    private void processGetByPriceRequest() {
     }
 
 

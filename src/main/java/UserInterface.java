@@ -128,15 +128,55 @@ public class UserInterface {
     }
 
     private void processGetByColorRequest() {
+        System.out.println("Enter vehicle color: ");
+        String color = scanner.nextLine();
+
+        display(dealership.getVehicleByColor(color));
     }
 
     private void processGetByYearRequest() {
+        try {
+            System.out.println("Enter minimum year of the vehicle: ");
+            int minYear = scanner.nextInt();
+
+            System.out.println("Enter max year of the vehicle: ");
+            int maxYear = scanner.nextInt();
+
+            display(dealership.getVehiclesByYear(minYear, maxYear));
+        } catch (InputMismatchException ime) {
+            System.err.println("invalid input");
+            scanner.nextLine();
+        }
     }
 
     private void processGetByModelRequest() {
+        try{
+            System.out.println("Enter who make the vehicle: ");
+            String makeVehicle = scanner.nextLine();
+
+            System.out.println("Enter model of the vehicle: ");
+            String modelVehicle = scanner.nextLine();
+
+            display(dealership.getVehiclesByModel(makeVehicle,modelVehicle));
+        }catch (InputMismatchException ime){
+            System.err.println("Invalid bro");
+            scanner.nextLine();
+        }
     }
 
     private void processGetByPriceRequest() {
+        try {
+            System.out.println("Enter minimum price of the vehicle: ");
+            double minPrice = scanner.nextDouble();
+
+            System.out.println("Enter maximum price of the vehicle: ");
+            double maxPrice = scanner.nextDouble();
+
+            display(dealership.getVehiclesByPrice(minPrice, maxPrice));
+        }catch (InputMismatchException ime){
+            System.err.println("invalid bro");
+            scanner.nextLine();
+        }
     }
 
 

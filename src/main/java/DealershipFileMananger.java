@@ -44,7 +44,7 @@ public class DealershipFileMananger {
 
     }
 
-    public void saveDealership(Dealership dealership){
+    public static void saveDealership(Dealership dealership){
         try {
             FileWriter fileWriter = new FileWriter("src/main/resources" + "inventory.csv");
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);

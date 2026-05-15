@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -11,7 +12,7 @@ public class UserInterface {
         this.dealership = dfm.getDealership();
     }
 
-    public void display(ArrayList<Vehicle> allVehicles) {
+    public void display() {
         init();
 
         boolean running = true;
@@ -34,7 +35,7 @@ public class UserInterface {
                     processAddVehicles();
                     break;
                 case "C":
-                    processRemoveVehicel();
+                    processRemoveVehicle();
                     break;
                 case "X":
                     running = false;
@@ -100,14 +101,14 @@ public class UserInterface {
     }
 
     private void processGetAllVehiclesRequest() {
-        display(dealership.getAllVehicles());
+        displayVehicle(dealership.getAllVehicles());
     }
 
     private void processGetByVehicleTypeRequest() {
         System.out.println("Enter vehicle type:");
         String vehicleType = scanner.nextLine();
 
-    display(dealership.getVehicleByType(vehicleType));
+        displayVehicle(dealership.getVehicleByType(vehicleType));
     }
 
     private void processGetByMilageRequest() {
@@ -120,7 +121,7 @@ public class UserInterface {
             int maximumMilage = scanner.nextInt();
             scanner.nextLine();
 
-            display(dealership.getVehicleByMillage(minimumMilage,maximumMilage));
+            displayVehicle(dealership.getVehicleByMillage(minimumMilage, maximumMilage));
         } catch (InputMismatchException ime) {
             System.err.println("Enter correct value");
             scanner.nextLine();
@@ -131,7 +132,7 @@ public class UserInterface {
         System.out.println("Enter vehicle color: ");
         String color = scanner.nextLine();
 
-        display(dealership.getVehicleByColor(color));
+        displayVehicle(dealership.getVehicleByColor(color));
     }
 
     private void processGetByYearRequest() {
@@ -142,7 +143,7 @@ public class UserInterface {
             System.out.println("Enter max year of the vehicle: ");
             int maxYear = scanner.nextInt();
 
-            display(dealership.getVehiclesByYear(minYear, maxYear));
+            displayVehicle(dealership.getVehiclesByYear(minYear, maxYear));
         } catch (InputMismatchException ime) {
             System.err.println("invalid input");
             scanner.nextLine();
@@ -150,15 +151,15 @@ public class UserInterface {
     }
 
     private void processGetByModelRequest() {
-        try{
+        try {
             System.out.println("Enter who make the vehicle: ");
             String makeVehicle = scanner.nextLine();
 
             System.out.println("Enter model of the vehicle: ");
             String modelVehicle = scanner.nextLine();
 
-            display(dealership.getVehiclesByModel(makeVehicle,modelVehicle));
-        }catch (InputMismatchException ime){
+            displayVehicle(dealership.getVehiclesByModel(makeVehicle, modelVehicle));
+        } catch (InputMismatchException ime) {
             System.err.println("Invalid bro");
             scanner.nextLine();
         }
@@ -172,19 +173,73 @@ public class UserInterface {
             System.out.println("Enter maximum price of the vehicle: ");
             double maxPrice = scanner.nextDouble();
 
-            display(dealership.getVehiclesByPrice(minPrice, maxPrice));
-        }catch (InputMismatchException ime){
+            displayVehicle(dealership.getVehiclesByPrice(minPrice, maxPrice));
+        } catch (InputMismatchException ime) {
             System.err.println("invalid bro");
             scanner.nextLine();
         }
     }
 
 
-    private void processRemoveVehicel() {
+    private void processRemoveVehicle() {
+        dealership.removeVehicle(getVehicleFromUser());
+        DealershipFileMananger.saveDealership(dealership);
     }
 
     private void processAddVehicles() {
+        dealership.addVehicle(getVehicleFromUser());
+        DealershipFileMananger.saveDealership(dealership);
     }
 
+    private Vehicle getVehicleFromUser() {
+        boolean getInput = true;
+        do {
+            try {
+                System.out.println("Enter vehicle vin: ");
+                int vin = scanner.nextInt();
+                scanner.nextLine();
+
+                System.out.println("Enter vehicle year: ");
+                int year = scanner.nextInt();
+                scanner.nextLine();
+
+                System.out.println("Enter vehicle make: ");
+                String make = scanner.nextLine();
+
+                System.out.println("Enter vehicle model: ");
+                String model = scanner.nextLine();
+
+                System.out.println("Enter vehicle type: ");
+                String vehicleType = scanner.nextLine();
+
+                System.out.println("Enter vehicle color: ");
+                String color = scanner.nextLine();
+
+                System.out.println("Enter vehicle odometer: ");
+                int odometer = scanner.nextInt();
+                scanner.nextLine();
+
+                System.out.println("Enter vehicle price: ");
+                double price = scanner.nextDouble();
+                scanner.nextLine();
+
+                getInput = false;
+                return new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
+
+            }catch (InputMismatchException ime){
+                System.err.println("invalid input bro, try again");
+                scanner.nextLine();
+            }
+
+        }while (getInput);
+        return null;
+    }
+    private void displayVehicle(ArrayList<Vehicle> vehicles){
+        System.out.println("Vin | Year | Make | Model | Vehicle Type | Color | Odometer | Price");
+        for (Vehicle vehicle: vehicles){
+            System.out.println("");
+
+        }
+    }
 
 }

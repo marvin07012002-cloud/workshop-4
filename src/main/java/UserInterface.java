@@ -238,7 +238,7 @@ public class UserInterface {
         System.out.println("Vin | Year | Make | Model | Vehicle Type | Color | Odometer | Price");
         for (Vehicle vehicle: vehicles){
             System.out.println(vehicle.getVin()+"|"+vehicle.getYear()+"|"+vehicle.getMake()+"|"+vehicle.getVehicleType()+"|"
-            );
+            +vehicle.getColor()+"|"+vehicle.getOdometer()+"|"+vehicle.getPrice());
 
         }
     }
